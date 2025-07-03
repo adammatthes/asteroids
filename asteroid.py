@@ -18,6 +18,15 @@ class Asteroid(CircleShape):
 
     def update(self, dt):
         self.position += self.velocity * dt
+        if self.position.x > SCREEN_WIDTH + self.radius:
+            self.position.x = 0 - self.radius
+        elif self.position.x < 0 - self.radius:
+            self.position.x = SCREEN_WIDTH + self.radius
+
+        if self.position.y > SCREEN_HEIGHT + self.radius:
+            self.position.y = 0 - self.radius
+        elif self.position.y < 0 - self.radius:
+            self.position.y = SCREEN_HEIGHT + self.radius
 
     def split(self, explosion_group):
         old_radius = self.radius
@@ -39,6 +48,7 @@ class Asteroid(CircleShape):
         ast2.velocity = vec2
 
     def bounce(self, other):
+        '''Update the velocity of two asteroids that collides. Also mitigates overlapping asteroid sprites.'''
         delta = self.position - other.position
         distance = (delta).length()
       
