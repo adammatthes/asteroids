@@ -8,15 +8,19 @@ class Score():
         self.multiplier = 1
         self.font = pygame.font.SysFont('Arial', 40, bold=True)
         self.cooldown = 0
+        self.highscore = 0
     
     def __str__(self):
-        return f'Score: {self.total}    {"X" + str(self.multiplier) + " Multiplier Activated!" if self.multiplier > 1 else ""}'
+        return f'Score: {self.total}    Highscore: {self.highscore}    {"X" + str(self.multiplier) + " Multiplier Activated!" if self.multiplier > 1 else ""}'
 
     def increase_score(self):
         self.total += 1 * self.multiplier
 
     def reset_score(self):
         self.total = 0
+
+    def log_high_score(self):
+        self.highscore = max([self.total, self.highscore])
 
     def render(self, screen, dt):
         self.check_multiplier_cooldown(dt)

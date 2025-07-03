@@ -8,6 +8,7 @@ class Player(CircleShape):
         super().__init__(x, y, PLAYER_RADIUS)
         self.rotation = 0
         self.timer = 0
+        self.ready_to_respawn = False
 
     # in the player class
     def triangle(self):
@@ -43,6 +44,10 @@ class Player(CircleShape):
             self.move(-dt)
         if keys[pygame.K_SPACE]:
             self.shoot()
+        if keys[pygame.K_r] and self.ready_to_respawn:
+            self.position.x = SCREEN_WIDTH // 2
+            self.position.y = SCREEN_HEIGHT // 2
+            self.ready_to_respawn = False
 
     def shoot(self):
         if self.timer > 0:

@@ -19,6 +19,7 @@ class Explosion(pygame.sprite.Sprite):
 
     def update(self, dt):
         if self.finished:
+            self.kill()
             return
 
         self.radius += self.growth_speed

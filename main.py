@@ -35,6 +35,7 @@ def main():
     my_asteroid_field = AsteroidField()
     #my_explosion_manager = ExplosionManager()
     my_score = Score()
+    respawn_wait = 0
 
 
     while True:
@@ -47,9 +48,15 @@ def main():
         updatable.update(dt)
         for a in asteroids:
             if my_player.check_collision(a):
-                print("Game Over!")
-                print("Final Score:", my_score.total)
-                return
+                e = Explosion(my_player.position.x, my_player.position.y)
+                my_player.position.x = -500
+                my_player.position.y = -500
+                my_player.ready_to_respawn = True
+                my_score.log_high_score()
+                my_score.reset_score()
+                print("You Died!")
+                print("Score:", my_score.total)
+                
             for a1 in asteroids:
                 if a1.position == a.position:
                     continue
