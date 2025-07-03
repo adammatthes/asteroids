@@ -46,11 +46,13 @@ def main():
                 return
             for s in shots:
                 if s.check_collision(a):
+                    if a.color == 'purple':
+                        my_score.multiplier = 2  
                     a.split()
                     s.kill()
                     my_score.increase_score()
         
-        my_score.render(screen)
+        my_score.render(screen, dt)
 
 
         for d in drawable:
