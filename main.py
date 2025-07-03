@@ -47,7 +47,7 @@ def main():
             for s in shots:
                 if s.check_collision(a):
                     if a.color == 'purple':
-                        my_score.multiplier = 2  
+                        my_score.multiplier += 1 if my_score.multiplier < 5 else 0  
                     a.split()
                     s.kill()
                     my_score.increase_score()

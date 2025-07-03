@@ -10,7 +10,7 @@ class Score():
         self.cooldown = 0
     
     def __str__(self):
-        return f'Score: {self.total}    {"Multiplier Activated!" if self.multiplier > 1 else ""}'
+        return f'Score: {self.total}    {"X" + str(self.multiplier) + " Multiplier Activated!" if self.multiplier > 1 else ""}'
 
     def increase_score(self):
         self.total += 1 * self.multiplier

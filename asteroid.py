@@ -10,7 +10,7 @@ class Asteroid(CircleShape):
         self.x = x
         self.y = y
         self.radius = radius
-        self.color = 'yellow' if random.randint(0, 100) < 85 else 'purple'
+        self.color = 'yellow' if random.randint(0, 100) < 95 else 'purple'
 
     def draw(self, screen):
         pygame.draw.circle(screen, self.color, self.position, self.radius, 2)
