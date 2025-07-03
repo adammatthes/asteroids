@@ -5,6 +5,7 @@ from asteroid import Asteroid
 from asteroidfield import AsteroidField
 from shot import Shot
 from score import Score
+from explosion import Explosion, ExplosionManager
 
 def main():
     print("Starting Asteroids!")
@@ -21,7 +22,10 @@ def main():
     drawable = pygame.sprite.Group()
     asteroids = pygame.sprite.Group()
     shots = pygame.sprite.Group()
+    explosions = pygame.sprite.Group()
 
+    Explosion.containers = (explosions, updatable, drawable)
+    #ExplosionManager.containers = (explosions, updatable, drawable)
     Shot.containers = (shots, updatable, drawable)
     Asteroid.containers = (asteroids, updatable, drawable)
     AsteroidField.containers = (updatable)
@@ -29,6 +33,7 @@ def main():
     
     my_player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
     my_asteroid_field = AsteroidField()
+    #my_explosion_manager = ExplosionManager()
     my_score = Score()
 
 
@@ -49,7 +54,7 @@ def main():
                 if s.check_collision(a):
                     if a.color == 'purple':
                         my_score.multiplier += 1 if my_score.multiplier < 5 else 0  
-                    a.split()
+                    a.split(explosions)
                     s.kill()
                     my_score.increase_score()
         
