@@ -29,10 +29,10 @@ class Asteroid(CircleShape):
         angle = random.uniform(20, 50)
         vec1, vec2 = old_velocity.rotate(angle), old_velocity.rotate(-angle)
         new_radius = old_radius - ASTEROID_MIN_RADIUS
-        ast1 = Asteroid(old_position.x, old_position.y, new_radius)
+        ast1 = Asteroid(old_position.x - new_radius, old_position.y, new_radius)
         ast1.velocity = vec1 * 1.2
         
-        ast2 = Asteroid(old_position.x, old_position.y, new_radius)
+        ast2 = Asteroid(old_position.x + new_radius, old_position.y, new_radius)
         ast2.velocity = vec2
 
 

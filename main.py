@@ -43,6 +43,7 @@ def main():
         for a in asteroids:
             if my_player.check_collision(a):
                 print("Game Over!")
+                print("Final Score:", my_score.total)
                 return
             for s in shots:
                 if s.check_collision(a):
