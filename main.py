@@ -51,6 +51,8 @@ def main():
                 print("Final Score:", my_score.total)
                 return
             for a1 in asteroids:
+                if a1.position == a.position:
+                    continue
                 if a1.check_collision(a) or a.check_collision(a1):
                     a1.bounce(a)
 

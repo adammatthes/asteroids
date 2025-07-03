@@ -41,8 +41,30 @@ class Asteroid(CircleShape):
     def bounce(self, other):
         delta = self.position - other.position
         distance = (delta).length()
-        
+      
+        if distance == 0:
+            self.position.x += 1
+            other.position.x -= 1
+            self.velocity *= -1
+            other.velocity *= -1
+       
         n = pygame.Vector2(1, 0) if distance == 0 else (delta).normalize()
+ 
+        
+        min_distance = self.radius + other.radius
+        overlap = min_distance - distance
+        if overlap > 0:
+            separation_vector = n * (overlap / 2)
+            self.position += separation_vector
+            other.position -= separation_vector
+
+        max_attempts = 10
+        attempts = 0
+        while self.check_collision(other) and attempts < max_attempts:
+            self.position += n * 0.5
+            other.position -= n * 0.5
+            attempts += 1
+
         t = n.rotate(90)
 
         v1n = self.velocity.dot(n)
@@ -57,8 +79,8 @@ class Asteroid(CircleShape):
         vel1_final = (v1n_final) * n + (v1t * t)
         vel2_final = (v2n_final) * n + (v2t * t)
 
-        self.velocity = vel1_final
-        other.velocity = vel2_final
+        self.velocity = vel1_final * (1 + random.uniform(0, 0.005)) 
+        other.velocity = vel2_final * (1 + random.uniform(0, 0.005))
         
 
 
