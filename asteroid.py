@@ -37,6 +37,28 @@ class Asteroid(CircleShape):
         
         ast2 = Asteroid(old_position.x + new_radius, old_position.y, new_radius)
         ast2.velocity = vec2
+
+    def bounce(self, other):
+        delta = self.position - other.position
+        distance = (delta).length()
+        
+        n = pygame.Vector2(1, 0) if distance == 0 else (delta).normalize()
+        t = n.rotate(90)
+
+        v1n = self.velocity.dot(n)
+        v1t = self.velocity.dot(t)
+
+        v2n = other.velocity.dot(n)
+        v2t = other.velocity.dot(t)
+
+        v1n_final = v2n
+        v2n_final = v1n
+
+        vel1_final = (v1n_final) * n + (v1t * t)
+        vel2_final = (v2n_final) * n + (v2t * t)
+
+        self.velocity = vel1_final
+        other.velocity = vel2_final
         
 
 
