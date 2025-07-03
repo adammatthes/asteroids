@@ -4,6 +4,7 @@ from player import Player
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
 from shot import Shot
+from score import Score
 
 def main():
     print("Starting Asteroids!")
@@ -28,6 +29,7 @@ def main():
     
     my_player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
     my_asteroid_field = AsteroidField()
+    my_score = Score()
 
 
     while True:
@@ -46,7 +48,10 @@ def main():
                 if s.check_collision(a):
                     a.split()
                     s.kill()
+                    my_score.increase_score()
         
+        my_score.render(screen)
+
 
         for d in drawable:
             d.draw(screen)
